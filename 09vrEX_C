@@ -1,0 +1,15 @@
+// C++ code
+//
+
+int vrPin = 0; //vr 아날로그 핀 번호(A0)
+
+void setup()
+{
+  pinMode(vrPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Serial.println(analogRead(vrPin));
+}
