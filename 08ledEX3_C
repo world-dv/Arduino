@@ -1,0 +1,32 @@
+// C++ code
+// 회로가 시작되면 setup() 실행 -> loop() 실행
+// setup() : 처음 한번만 실행되는 함수
+// loop() : 무한으로 실행되는 함수
+
+int ledPin = 4; //LED의 핀 번호
+int btnPin = 3; //button의 핀 번호
+
+void setup()
+{
+	pinMode(ledPin, OUTPUT); //LED Pin을 OUTPUT으로 사용
+  	pinMode(btnPin, INPUT); //button Pin을 INPUT으로 사용
+  
+  	Serial.begin(9600); //9600pps의 속도
+}
+
+void loop()
+{
+  	Serial.println(digitalRead(btnPin));
+  	//digitialRead() : 값을 읽어옴
+  	//Serial.println() : 시리얼에 값 출력
+  	
+  	if(digitalRead(btnPin) == HIGH)
+    {
+      	digitalWrite(ledPin, HIGH); //LED Pin 높음(1)으로 설정
+    }
+  	else
+    {
+      	digitalWrite(ledPin, LOW); //LED Pin 낮음(0)으로 설정
+    }
+  	delay(500); //ms 단위로 기다림
+}
