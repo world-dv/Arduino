@@ -1,0 +1,28 @@
+// C++ code
+
+int arrLEDs[] = {2,3,4,5,6,7,8,9};
+int cntArrLEDs = 8;
+
+void setup()
+{
+  for(int i = 0; i < cntArrLEDs; i++)
+  {
+    pinMode(arrLEDs[i], OUTPUT);
+  }
+}
+
+void loop()
+{
+  //불 끄기
+  for(int i = 0; i < cntArrLEDs; i++)
+  {
+    digitalWrite(arrLEDs[i], HIGH);
+  }
+  delay(500);
+  //불 켜기
+  for(int i = 0; i < cntArrLEDs; i++)
+  {
+    digitalWrite(arrLEDs[i], LOW);
+  }
+  delay(500);
+}
