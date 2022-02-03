@@ -1,0 +1,28 @@
+#include <Servo.h> 
+// 서보 모터 라이브러리
+// Servo 변수 선언
+// attach(핀 번호) : 핀 모드 설정 
+// write(각도) : 각도 설정
+
+//라이브러리 추가(아이콘 클릭 후 포함) -> 전처리기 추가됨
+
+#define SERVOPIN 8
+Servo myservo; //변수 선언
+
+void setup()
+{
+  myservo.attach(SERVOPIN);
+}
+
+void loop()
+{
+  myservo.write(0);
+  delay(1000);
+  myservo.write(90);
+  delay(1000);
+  myservo.write(180);
+  delay(1000);
+  
+  myservo.write(0);
+  delay(1000);
+}
