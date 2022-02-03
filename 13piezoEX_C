@@ -1,0 +1,21 @@
+// C++ code
+//
+
+#define PIEZOPIN 3
+
+int arrNote[8] = {262,294,330,349,392,440,494,523};
+int arrNoteLen = 8;
+
+void setup()
+{
+  pinMode(PIEZOPIN, OUTPUT);
+}
+
+void loop()
+{
+  for(int i = 0; i < arrNoteLen; i++)
+  {
+    tone(PIEZOPIN, arrNote[i], 500);
+    delay(500);
+  }
+}
