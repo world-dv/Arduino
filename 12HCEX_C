@@ -1,0 +1,32 @@
+// C++ code
+//
+
+#define TRIGPIN 11
+#define ECHOPIN 10
+
+void setup()
+{
+  pinMode(TRIGPIN, OUTPUT);
+  pinMode(ECHOPIN, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  //거리값 계산, 센서 측정 -> 시간
+  digitalWrite(TRIGPIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIGPIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGPIN, LOW);
+  
+  long dur = pulseIn(ECHOPIN, HIGH);
+  
+  //초음파로 거리 계산(cm) d = v * t
+  long dis = dur / 58;
+  
+  Serial.print("dis = ");
+  Serial.println(dis);
+  
+  delay(500);
+}
