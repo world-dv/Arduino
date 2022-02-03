@@ -1,0 +1,28 @@
+// C++ code
+//
+
+int vrPin = 0; //vr 아날로그 핀 번호(A0)
+int ledPin = 3;
+
+void setup()
+{
+  pinMode(vrPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Serial.println(analogRead(vrPin));
+  
+  if(analogRead(vrPin) > 511)
+  {
+    digitalWrite(ledPin, HIGH);
+  }
+  else
+  {
+    digitalWrite(ledPin, LOW);
+  }
+  delay(500);
+}
