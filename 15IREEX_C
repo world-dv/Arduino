@@ -1,0 +1,37 @@
+#include <IRremote.h>
+
+// C++ code
+
+#define LEDPIN 2
+#define IRPIN A0
+IRrecv irRecv(IRPIN);
+decode_results results;
+
+void setup()
+{
+  pinMode(LEDPIN, OUTPUT);
+  Serial.begin(9600);
+  irRecv.enableIRIn();
+}
+
+void loop()
+{
+  if(irRecv.decode(&results))
+  {
+    Serial.println(results.value, HEX);
+    digitalWrite(LEDPIN, HIGH);
+    delay(800);
+    digitalWrite(LEDPIN, LOW);
+    delay(800);
+    switch(results.value)
+    {
+      case 0xFD30CF : //0
+      	Serial.println("Disney channel");
+      	break;
+      case 0xFD08F7: //1
+      	Serial.println("Netfilx channel");
+      	break;
+    }
+    irRecv.resume(); //다음 신호 대기
+  }
+}
