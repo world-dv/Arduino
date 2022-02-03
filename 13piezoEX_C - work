@@ -1,0 +1,65 @@
+// C++ code
+//
+
+#define PIEZOPIN 3
+
+#define C4 262
+#define D4 294
+#define E4 330
+#define F4 349
+#define G4 392
+#define A4 440
+#define B4 494
+#define C5 554
+
+int arrNote[] = {C4,C4,G4,G4,A4,A4,G4};
+int arrNote2[] = {F4,F4,E4,E4,D4,D4,C4};
+int arrNote3[] = {G4,G4,F4,F4,E4,E4,D4};
+
+void playMelody(int order)
+{
+  if(order == 1)
+  {
+    for(int i = 0; i < arrNoteLen; i++)
+    {
+      tone(PIEZOPIN, arrNote[i], 500);
+      delay(500);
+    }
+  }
+  else if (order == 2)
+  {
+    for(int i = 0; i < arrNoteLen; i++)
+    {
+      tone(PIEZOPIN, arrNote2[i], 500);
+      delay(500);
+    }
+  }
+  else
+  {
+    for(int i = 0; i < arrNoteLen; i++)
+    {
+      tone(PIEZOPIN, arrNote3[i], 500);
+      delay(500);
+    }
+  }
+}
+
+int arrNoteLen = 7;
+
+void setup()
+{
+  pinMode(PIEZOPIN, OUTPUT);
+  
+  playMelody(1);
+  playMelody(2);
+  playMelody(3);
+  playMelody(3);
+  playMelody(1);
+  playMelody(2);
+}
+
+void loop()
+{
+  
+}
+
