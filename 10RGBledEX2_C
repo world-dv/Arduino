@@ -1,0 +1,31 @@
+// C++ code
+//
+
+int redLed = 12;
+int blueLed = 11;
+int greenLed = 10;
+
+void setup()
+{
+  pinMode(redLed, OUTPUT);
+  pinMode(blueLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+
+}
+
+void loop()
+{
+  //아날로그 빛의 범위 0 ~ 255
+  analogWrite(redLed, 255);
+  analogWrite(blueLed, 0);
+  analogWrite(greenLed, 0);
+  delay(500);
+  analogWrite(redLed, 0);
+  analogWrite(blueLed, 255);
+  analogWrite(greenLed, 0);
+  delay(500);
+  analogWrite(redLed, 0);
+  analogWrite(blueLed, 0);
+  analogWrite(greenLed, 255);
+  delay(500);
+}
