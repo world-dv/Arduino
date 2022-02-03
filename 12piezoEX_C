@@ -1,0 +1,27 @@
+// C++ code
+//
+
+#define PIEZOPIN 3
+
+void setup()
+{
+  pinMode(PIEZOPIN, OUTPUT);
+}
+
+void loop()
+{
+  tone(PIEZOPIN, 262, 500); //C4, 262, 도
+  delay(500);
+  tone(PIEZOPIN, 294, 500); //C4, 294, 레
+  delay(500);
+  tone(PIEZOPIN, 330, 500); //C4, 330, 미
+  delay(500);
+  tone(PIEZOPIN, 349, 500); //C4, 349, 파
+  delay(500);
+  tone(PIEZOPIN, 392, 500); //C4, 392, 솔
+  delay(500);
+  tone(PIEZOPIN, 440, 500); //C4, 440, 라
+  delay(500);
+  tone(PIEZOPIN, 494, 500); //C4, 494, 시
+  delay(500);
+}
