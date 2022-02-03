@@ -1,0 +1,30 @@
+// C++ code
+
+#define REDLED 12
+#define BLUELED 11
+#define GREENLED 10
+//하드웨어 부분은 수정을 잘 하지 않으므로 전처리로 표기
+//전처리기는 대문자로 나타냄
+
+void setup()
+{
+  pinMode(REDLED, OUTPUT);
+  pinMode(BLUELED, OUTPUT);
+  pinMode(GREENLED, OUTPUT);
+}
+
+void loop()
+{
+  //아날로그 빛의 범위 0 ~ 255
+  setColor(255, 0, 0);
+  setColor(0, 255, 0);
+  setColor(0, 0, 255);
+}
+
+void setColor(int red, int blue, int green)
+{
+  	analogWrite(REDLED, red);
+  	analogWrite(BLUELED, blue);
+ 	analogWrite(GREENLED, green);
+  	delay(500);
+}
