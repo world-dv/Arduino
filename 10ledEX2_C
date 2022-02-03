@@ -1,0 +1,24 @@
+// C++ code
+
+int ledPin = 4;
+int vrPin = 0; //A0
+
+void setup()
+{
+	pinMode(ledPin, OUTPUT); 
+  	pinMode(vrPin, INPUT); 
+	
+  	Serial.begin(9600);
+}
+
+void loop()
+{
+  	int vr = analogRead(vrPin);
+  	int lux = map(vr, 0, 1023, 0, 255);
+  	//map(가변 저항 값, (가변저항 입력값 0 ~ 1023), (LED 밝기 0 ~ 255));
+  
+  	Serial.println(lux);
+  
+  	digitalWrite(ledPin, lux); 
+    delay(500);
+}
