@@ -1,0 +1,49 @@
+// include the library code:
+#include <LiquidCrystal.h>
+#include <IRremote.h>
+
+#define LEDPIN 2
+#define IRPIN A0
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+IRrecv irRecv(IRPIN);
+decode_results results;
+
+void setup() {
+  pinMode(LEDPIN, OUTPUT);
+  irRecv.enableIRIn();
+  
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("hello, world!");
+}
+
+void loop() {
+ if(irRecv.decode(&results))
+ {
+   digitalWrite(LEDPIN, HIGH);
+   delay(800);
+   digitalWrite(LEDPIN, LOW);
+   delay(800);
+   
+   switch(results.value)
+   {
+     case 0xFD30CF: //0
+     	lcd.clear(); //화면 초기화
+     	lcd.setCursor(2,0);
+     	lcd.print("hello, LHJ !");
+     	lcd.setCursor(0,1); //칸, 줄
+     	lcd.print("Disney channel");
+     	break;
+     case 0xFD08F7: //1
+     	lcd.clear();
+     	lcd.setCursor(0,1);
+     	lcd.print("Netfilx channel");
+     	break;
+   }
+   irRecv.resume(); //다음 신호 대기
+ }
+}
+ 
