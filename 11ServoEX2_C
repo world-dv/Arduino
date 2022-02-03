@@ -1,0 +1,27 @@
+#include <Servo.h> 
+// 서보 모터 라이브러리
+// Servo 변수 선언
+// attach(핀 번호) : 핀 모드 설정 
+// write(각도) : 각도 설정
+
+//라이브러리 추가(아이콘 클릭 후 포함) -> 전처리기 추가됨
+
+#define SERVOPIN 8
+Servo myservo; //변수 선언
+
+void setup()
+{
+  myservo.attach(SERVOPIN);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  if(Serial.available() > 1) //데이터가 넘어왔다면
+  {
+    int data = Serial.parseInt(); //int형으로 저장
+    Serial.print("input : "); //데이터 출력 후 다음 줄로 넘어가지 X
+    Serial.println(data); //데이터 출력 후 다음 줄로 넘어감
+    myservo.write(data);
+  } //시리얼 모니터에 입력값 입력 후 엔터
+}
