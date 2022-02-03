@@ -1,0 +1,27 @@
+// C++ code
+
+int ledPin = 4;
+int durTime = 0;
+
+void setup()
+{
+	pinMode(ledPin, OUTPUT); //4번 핀을 OUTPUT으로 사용
+}
+
+void loop()
+{
+  	if(durTime == 20)
+    {
+      durTime = 0;
+    }
+  	else
+  	{
+    	durTime += 1;
+    }
+  
+  	digitalWrite(ledPin, HIGH); 
+    delay(durTime * 100); //0부터 20이 됨
+  
+  	digitalWrite(ledPin, LOW);
+  	delay((20 - durTime) * 100); //20부터 0이 됨
+}
