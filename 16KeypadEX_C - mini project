@@ -1,0 +1,150 @@
+#include <Keypad.h>
+
+// C++ code
+
+//Color
+#define RED 10
+#define BLUE 11
+#define GREEN 12
+
+void setColor(int red, int blue, int green)
+{
+  digitalWrite(RED, red);
+  digitalWrite(BLUE, blue);
+  digitalWrite(GREEN, green);
+  delay(500);
+}
+
+//Sound
+#define PIEZOPIN 13
+
+#define C4 262
+#define D4 294
+#define E4 330
+#define F4 349
+#define G4 392
+#define A4 440
+#define B4 494
+#define C5 554
+
+int arrNote[] = {C4,C4,G4,G4,A4,A4,G4}; //도도솔솔라라솔
+int arrNote2[] = {F4,F4,E4,E4,D4,D4,C4}; //파파미미레레도
+int arrNote3[] = {G4,G4,F4,F4,E4,E4,D4}; //솔솔파파미미레
+int arrNoteLen = 7;
+
+void playMelody(int order)
+{
+  if(order == 1)
+  {
+    for(int i = 0; i < arrNoteLen; i++)
+    {
+      tone(PIEZOPIN, arrNote[i], 500);
+      delay(500);
+    }
+  }
+  else if (order == 2)
+  {
+    for(int i = 0; i < arrNoteLen; i++)
+    {
+      tone(PIEZOPIN, arrNote2[i], 500);
+      delay(500);
+    }
+  }
+  else
+  {
+    for(int i = 0; i < arrNoteLen; i++)
+    {
+      tone(PIEZOPIN, arrNote3[i], 500);
+      delay(500);
+    }
+  }
+}
+
+
+//Matrix
+const byte cntRows=4;
+const byte cntCols=4;
+
+char myKeyMap[cntRows][cntCols] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+
+byte rowPins[cntRows] = {9,8,7,6}; //행
+byte colPins[cntCols] = {5,4,3,2}; //열
+
+Keypad mykeypad = Keypad(makeKeymap(myKeyMap), rowPins, colPins,cntRows, cntCols);
+
+String pw = "00"; //비밀번호
+String iptPw="";
+
+void setup()
+{
+  Serial.begin(9600);
+  
+  pinMode(PIEZOPIN, OUTPUT);
+  pinMode(RED, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+}
+
+void loop()
+{
+  char ipKey = mykeypad.getKey();
+  
+  if(ipKey)
+  {
+    //Serial.println(ipKey);
+    if(ipKey == 'C') //초기화
+    {
+      iptPw = "";
+      Serial.println("reset");
+    }
+    else if (ipKey == 'A') //set pw diy
+    {
+      pw = iptPw;
+      iptPw = "";
+      Serial.println("Set Pin.");
+    }
+    else if (ipKey == 'B') //set pw auto
+    {
+      randomSeed(analogRead(1));
+      pw = random(0, 20);
+      Serial.print("pw = ");
+      Serial.println(pw);
+    }
+    else if (ipKey == 'D') //done 
+    {
+      Serial.print("pw = ");
+      Serial.println(pw);
+      if(iptPw == pw)
+      {
+        Serial.println("OK");
+        setColor(0,0,1); //맞추면 초록불
+        playMelody(1);
+      }
+      else
+      {
+        Serial.println("Check your Pin.");
+        if (iptPw > pw) //입력값이 더 클 때
+        {
+          setColor(1,0,0);//빨간불
+          playMelody(2);
+        }
+        else 
+        {
+          setColor(0,1,0); //파란불 
+          playMelody(3);
+        }
+      }
+      iptPw = "";
+    }
+    else //입력값 출력
+    {
+      iptPw += ipKey;
+      Serial.println(iptPw);
+    }
+  }
+}
